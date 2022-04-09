@@ -1,7 +1,8 @@
-package com.example.listporxhese
+package com.example.listporxhese.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.listporxhese.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
