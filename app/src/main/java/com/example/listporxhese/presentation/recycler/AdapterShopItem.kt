@@ -3,27 +3,31 @@ package com.example.listporxhese.presentation
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.example.listporxhese.databinding.ItemShopDisabledBinding
 import com.example.listporxhese.databinding.ItemShopEnabledBinding
 import com.example.listporxhese.domain.ShopItem
+import com.example.listporxhese.presentation.recycler.ShopItemDiffUtilCallBack
 
 interface OnShopItemClick{
     fun longClickItem(shopItem: ShopItem)
     fun clickItem(shopItem: ShopItem)
 }
-class AdapterShopItem() : RecyclerView.Adapter<AdapterShopItem.ViewHolderShopItem>() {
+//class AdapterShopItem() : RecyclerView.Adapter<AdapterShopItem.ViewHolderShopItem>() {
+class AdapterShopItem : ListAdapter<ShopItem,AdapterShopItem.ViewHolderShopItem>(
+    ShopItemDiffUtilCallBack()
+) {
 
     var onShopItemClick: OnShopItemClick? = null
-    var shopList = listOf<ShopItem>()
-        set(value) {
-            val callback = ShopListDiffUtil(shopList,value)
-            val diffUtil = DiffUtil.calculateDiff(callback)
-            diffUtil.dispatchUpdatesTo(this)
-            field = value
-        }
+//    var shopList = listOf<ShopItem>()
+//        set(value) {
+//            val callback = ShopListDiffUtil(shopList,value)
+//            val diffUtil = DiffUtil.calculateDiff(callback)
+//            diffUtil.dispatchUpdatesTo(this)
+//            field = value
+//        }
 
     var i = 0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderShopItem {
@@ -42,7 +46,8 @@ class AdapterShopItem() : RecyclerView.Adapter<AdapterShopItem.ViewHolderShopIte
     }
 
     override fun onBindViewHolder(holder: ViewHolderShopItem, position: Int) {
-        val shopItem = shopList[position]
+        //val shopItem = shopList[position]
+        val shopItem = getItem(position)
         if (shopItem.isEnabled) holder.bindEnabled(shopItem)
         else holder.bindDisabled(shopItem)
 
@@ -56,7 +61,7 @@ class AdapterShopItem() : RecyclerView.Adapter<AdapterShopItem.ViewHolderShopIte
     }
 
     override fun getItemViewType(position: Int): Int {
-        val item = shopList[position]
+        val item = getItem(position)
         return if (item.isEnabled) {
             VIEW_TYPE_ENABLED
         } else {
@@ -65,7 +70,7 @@ class AdapterShopItem() : RecyclerView.Adapter<AdapterShopItem.ViewHolderShopIte
 
     }
 
-    override fun getItemCount(): Int = shopList.size
+    //override fun getItemCount(): Int = shopList.size
 
 
 
