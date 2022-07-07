@@ -38,7 +38,7 @@ class AdapterShopItem : ListAdapter<ShopItem, AdapterShopItem.ViewHolderShopItem
                 ItemShopDisabledBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             }
             else -> throw RuntimeException("Unknown view type: $viewType")
-        } 
+        }
 
         return ViewHolderShopItem(layout)
     }
