@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.listporxhese.databinding.ActivityMainBinding
 import com.example.listporxhese.domain.ShopItem
-import com.example.listporxhese.presentation.AdapterShopItem.Companion.MAX_POOL_SIZE
-import com.example.listporxhese.presentation.AdapterShopItem.Companion.VIEW_TYPE_DISABLED
-import com.example.listporxhese.presentation.AdapterShopItem.Companion.VIEW_TYPE_ENABLED
+import com.example.listporxhese.presentation.recycler.AdapterShopItem
+import com.example.listporxhese.presentation.recycler.AdapterShopItem.Companion.MAX_POOL_SIZE
+import com.example.listporxhese.presentation.recycler.AdapterShopItem.Companion.VIEW_TYPE_DISABLED
+import com.example.listporxhese.presentation.recycler.AdapterShopItem.Companion.VIEW_TYPE_ENABLED
+import com.example.listporxhese.presentation.recycler.OnShopItemClick
 
 class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null

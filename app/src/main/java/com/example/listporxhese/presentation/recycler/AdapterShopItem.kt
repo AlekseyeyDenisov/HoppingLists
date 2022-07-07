@@ -1,4 +1,4 @@
-package com.example.listporxhese.presentation
+package com.example.listporxhese.presentation.recycler
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,16 +9,13 @@ import androidx.viewbinding.ViewBinding
 import com.example.listporxhese.databinding.ItemShopDisabledBinding
 import com.example.listporxhese.databinding.ItemShopEnabledBinding
 import com.example.listporxhese.domain.ShopItem
-import com.example.listporxhese.presentation.recycler.ShopItemDiffUtilCallBack
 
 interface OnShopItemClick{
     fun longClickItem(shopItem: ShopItem)
     fun clickItem(shopItem: ShopItem)
 }
 //class AdapterShopItem() : RecyclerView.Adapter<AdapterShopItem.ViewHolderShopItem>() {
-class AdapterShopItem : ListAdapter<ShopItem,AdapterShopItem.ViewHolderShopItem>(
-    ShopItemDiffUtilCallBack()
-) {
+class AdapterShopItem : ListAdapter<ShopItem, AdapterShopItem.ViewHolderShopItem>(ShopItemDiffUtilCallBack()) {
 
     var onShopItemClick: OnShopItemClick? = null
 //    var shopList = listOf<ShopItem>()
@@ -34,13 +31,14 @@ class AdapterShopItem : ListAdapter<ShopItem,AdapterShopItem.ViewHolderShopItem>
         Log.d("@@@", "onCreateViewHolder: count ${++i}")
         val layout = when (viewType) {
             VIEW_TYPE_ENABLED -> {
-                ItemShopEnabledBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                ItemShopEnabledBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+
             }
             VIEW_TYPE_DISABLED -> {
                 ItemShopDisabledBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             }
             else -> throw RuntimeException("Unknown view type: $viewType")
-        }
+        } 
 
         return ViewHolderShopItem(layout)
     }
@@ -50,6 +48,7 @@ class AdapterShopItem : ListAdapter<ShopItem,AdapterShopItem.ViewHolderShopItem>
         val shopItem = getItem(position)
         if (shopItem.isEnabled) holder.bindEnabled(shopItem)
         else holder.bindDisabled(shopItem)
+
 
         holder.itemView.setOnLongClickListener {
             onShopItemClick?.longClickItem(shopItem)
